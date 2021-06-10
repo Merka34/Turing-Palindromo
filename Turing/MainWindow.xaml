@@ -1,0 +1,232 @@
+﻿<Window x:Class="Turing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Turing.ViewModels"
+        xmlns:local="clr-namespace:Turing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:Context></vm:Context>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="30" HorizontalAlignment="Center">Máquina de Turing - Palindromo</TextBlock>
+        <DockPanel Grid.Row="1">
+            <TextBlock FontSize="35">Cadena: </TextBlock>
+            <TextBox Text="{Binding Texto}"></TextBox>
+        </DockPanel>
+        
+        
+        <ListView Grid.Row="2" ItemsSource="{Binding CadenaOriginal}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Name="Border" BorderBrush="Black" BorderThickness="1">
+                                    <ContentPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding MiChar}">
+                        <TextBlock.Resources>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IdChar}" Value="1">
+                                        <Setter Property="Foreground" Value="Green"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                                <Setter Property="Foreground" Value="Purple"></Setter>
+                                <Setter Property="FontSize" Value="25"></Setter>
+                                <Setter Property="Width" Value="40"></Setter>
+                                <Setter Property="Height" Value="40"></Setter>
+                                <Setter Property="Padding" Value="7,0,0,0"></Setter>
+                            </Style>
+                        </TextBlock.Resources>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <ListView Grid.Row="3" ItemsSource="{Binding CadenaBien}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Name="Border" BorderBrush="Black" BorderThickness="1">
+                                    <ContentPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding MiChar}">
+                        <TextBlock.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                                <Setter Property="FontSize" Value="25"></Setter>
+                                <Setter Property="Width" Value="40"></Setter>
+                                <Setter Property="Height" Value="40"></Setter>
+                                <Setter Property="Padding" Value="7,0,0,0"></Setter>
+                            </Style>
+                        </TextBlock.Resources>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Grid.Row="4" ItemsSource="{Binding CadenaResultado}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Name="Border" BorderBrush="Black" BorderThickness="1">
+                                    <ContentPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding MiChar}">
+                        <TextBlock.Resources>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IdChar}" Value="1">
+                                        <Setter Property="Background" Value="Green"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IdChar}" Value="2">
+                                        <Setter Property="Background" Value="Red"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                                <Setter Property="FontSize" Value="25"></Setter>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="Width" Value="40"></Setter>
+                                <Setter Property="Height" Value="40"></Setter>
+                                <Setter Property="Padding" Value="7,0,0,0"></Setter>
+                            </Style>
+                        </TextBlock.Resources>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DockPanel>
+                <TextBlock>Velocidad:</TextBlock>
+                <TextBlock DockPanel.Dock="Right" Text="{Binding Speed, StringFormat=N2}"></TextBlock>
+                <Slider Minimum="0.2"  Maximum="5" Value="{Binding Speed}"></Slider>
+            </DockPanel>
+            <Button Grid.Column="1" Command="{Binding ComenzarCommand}" Content="Comenzar">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="FontSize" Value="28"></Setter>
+                        <Setter Property="Margin" Value="5"></Setter>
+                        <Setter Property="Background" Value="DarkGreen"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ejecucion}" Value="true">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Ejecucion}" Value="false">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding CancelarCommand}" Content="Cancelar">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="FontSize" Value="28"></Setter>
+                        <Setter Property="Margin" Value="5"></Setter>
+                        <Setter Property="Background" Value="DarkRed"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ejecucion}" Value="false">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Ejecucion}" Value="true">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock Grid.Column="3" Background="DodgerBlue" ></TextBlock>
+            <TextBlock Grid.Column="3" FontSize="20" Text="{Binding Estado}">
+                <TextBlock.Resources>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TextPar}" Value="true">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TextPar}" Value="false">
+                                <Setter Property="Visibility" Value="Hidden"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IdText}" Value="0">
+                                <Setter Property="Foreground" Value="Red"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IdText}" Value="1">
+                                <Setter Property="Foreground" Value="Yellow"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IdText}" Value="2">
+                                <Setter Property="Foreground" Value="Green"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Resources>
+            </TextBlock>
+        </Grid>
+        
+        <TextBlock Grid.Row="6" Text="{Binding Error}" Foreground="Red" FontSize="20"></TextBlock>
+        
+        
+    </Grid>
+</Window>
